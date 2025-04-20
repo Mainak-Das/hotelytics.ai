@@ -19,7 +19,7 @@ def img_to_base64(image_path):
 # Page config
 st.set_page_config(
     page_title="Hotelytics.ai",
-    page_icon="templates\img\hotelytics_favicon.png",
+    page_icon="templates/img/hotelytics_favicon.png",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -90,7 +90,7 @@ st.markdown("""
 
 
 # Load logo
-img_path = "templates\img\hotelytics_logo.png"
+img_path = "templates/img/hotelytics_logo.png"
 img_base64 = img_to_base64(img_path)
 if img_base64:
     st.sidebar.markdown(
