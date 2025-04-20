@@ -271,7 +271,7 @@ if selected == "Home":
     
     def render_home():
         if st.button("Try It Now »", key="cta"):
-            st.session_state.page = "Predict"  # Update page state to 'Predict'
+            st.session_state.page = "Predict" 
 
     # Function to render the Predict page
     def render_predict():

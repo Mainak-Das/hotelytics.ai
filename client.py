@@ -63,10 +63,6 @@ def summarizer_display(df):
             """, unsafe_allow_html=True)
     
 
-    # Initialize summary result in session state 
-    # if 'summary_result' not in st.session_state:
-    #     st.session_state['summary_result'] = None
-
 
     st.markdown("<h4 class='centered-title'>Choose summary parameters or click 'Generate Summary' for an overview.</h4>", unsafe_allow_html=True)
     selected_aspects = st.multiselect(
@@ -239,7 +235,6 @@ def bulk_sentiment_analyzer():
             summarizer_display(dataframe)
 
 
-
 def single_sentiment_analyzer():
     col1 = st.container()
     with col1:
@@ -274,16 +269,6 @@ def single_sentiment_analyzer():
             }
         }
 
-        </style>
-        """, unsafe_allow_html=True)
-
-        st.markdown(
-            '<div class="single-sentiment-full-width">A smarter way to<br><span class="single-sentiment-line2">interpret your hotel reviews</span></div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown("""
-        <style>
         .single-sentiment-sub-heading {
             width: 100%;
             text-align: center;
@@ -291,18 +276,13 @@ def single_sentiment_analyzer():
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
             color: #9ca3af;
-            margin-top: -15px;
+            margin-top: 20px;
         }
-                    
+
         .single-sentiment-line2 {
             margin-top: -10px;
         }
-        </style>
-        """, unsafe_allow_html=True)
 
-        # CSS for highlighting text bg
-        highlight_css = """
-        <style>
         .single-sentiment-container {
             line-height: 1.4;
             text-align: center;
@@ -350,11 +330,76 @@ def single_sentiment_analyzer():
             border-radius: 20% 25% 20% 24%;
             padding: 10px 3px 3px 10px;
         }
-        </style>
-        """
 
-        # Apply the CSS
-        st.markdown(highlight_css, unsafe_allow_html=True)
+        /* New Predict Button Styling */
+        .stButton {
+            margin-top: 0px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stButton > button {
+            margin: 0 auto;
+            width: 250px;
+            background: linear-gradient(45deg, #830402, #c81d04, #da4a04, #f48a06, #ea6504);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 0.2rem 0.2rem;
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            transition: transform 1s ease, box-shadow 1s ease, background-position 1.2s ease;
+            text-align: center;
+            text-decoration: none; 
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            background-size: 400% 400%;
+            background-position: 0% 50%;
+        }
+
+        .stButton > button:hover {
+            background-position: 100% 50%;
+            transform: scale(1.05);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stButton p {
+            font-size: 1.5rem;
+            font-family: "Poppins", "Sans-serif";
+            font-weight: 600;
+            color: #0e1117;
+        }
+
+        .single-sentiment-green-success {
+            color: #007200;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: #96e072;
+            border-left: 10px solid #007200;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+                
+        .single-sentiment-red-success {
+            color: #6a040f;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: #f8d7da;
+            border-left: 10px solid #6a040f;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown(
+            '<div class="single-sentiment-full-width">A smarter way to<br><span class="single-sentiment-line2">interpret your hotel reviews</span></div>',
+            unsafe_allow_html=True
+        )
 
         st.markdown(
             '''
@@ -366,7 +411,6 @@ def single_sentiment_analyzer():
             ''',
             unsafe_allow_html=True
         )
-
 
     # Multiselector      
     col1, col2, col3 = st.columns([1, 3, 1], vertical_alignment="top")
@@ -390,7 +434,7 @@ def single_sentiment_analyzer():
                     margin-top: 50px;
                     margin-bottom: -10px !important; 
                 }
-                    
+
                 .single-sentiment-custom-textarea {
                     text-align: center;
                     margin-top: 0px;
@@ -402,70 +446,20 @@ def single_sentiment_analyzer():
                     border: 1px solid #d7ae19;
                     padding: 10px;
                     font-family: 'Montserrat', sans-serif;
-
                 }
 
-                .st-emotion-cache-b0y9n5.em9zgd02 {
-                    display: block;
-                    margin: 0px auto 20px auto;
-                    background: linear-gradient(45deg, #830402, #c81d04, #da4a04, #f48a06, #ea6504); /* Dynamic gradient */
-                    color: white;
-                    border: none;
-                    border-radius: 10px;
-                    padding: 5px 30px;
-                    font-size: 25px;
-                    font-weight: 500;
-                    font-family: 'Poppins', sans-serif;
-                    transition: transform 1s ease, background-position 1s ease; /* Add background-position transition */
-                    text-align: center;
-                    text-decoration: none;
-                    background-size: 400% 400%; /* Make the gradient large enough to move */
-                    background-position: 0% 50%; /* Start position of the gradient */
-                }
-
-                .st-emotion-cache-b0y9n5.em9zgd02:hover {
-                    background-position: 100% 50%; /* Change the gradient position on hover */
-                    transform: scale(1.03); /* Slight size increase */
-                    border: none; /* No border needed for hover */
-                }
-
-                .st-emotion-cache-b0y9n5.em9zgd02 p {
-                    font-size: 1.2rem;
-                    font-family: 'Montserrat', sans-serif;
-                    font-weight: 550;
-                    color: #ffffff;
-                }
-
-                .single-sentiment-green-success {
-                    color: #007200;
-                    font-size: 30px;
-                    font-weight: bold;
-                    background-color: #96e072;
-                    border-left: 10px solid #007200;
-                    padding: 10px;
-                    border-radius: 10px;
-                    text-align: center;
-                }
-                    
-                .single-sentiment-red-success {
-                    color: #6a040f;
-                    font-size: 30px;
-                    font-weight: bold;
-                    background-color: #f8d7da;
-                    border-left: 10px solid #6a040f;
-                    padding: 10px;
-                    border-radius: 10px;
-                    text-align: center;
-                }
-                
             </style>
         """, unsafe_allow_html=True)
 
-        st.markdown("<h4 class='single-sentiment-centered-title'>Enter a  review to predict its sentiment</h4>", unsafe_allow_html=True)
-        # Create a text area with custom styling
-        user_reviews = st.text_area("", placeholder="e.g: Amazing experience! From check-in to check-out, everything was seamless. The hotel is stylish, clean, and the customer service is exceptional. Highly recommend!", height=80, key="custom_textarea")
+        st.markdown("<h4 class='single-sentiment-centered-title'>Enter a review to predict its sentiment</h4>", unsafe_allow_html=True)
+        
+        user_reviews = st.text_area(
+            "", 
+            placeholder="e.g: Amazing experience! From check-in to check-out, everything was seamless. The hotel is stylish, clean, and the customer service is exceptional. Highly recommend!", 
+            height=80, 
+            key="custom_textarea"
+        )
     
-        # Create a button to fetch the content
         if st.button("Predict ➔"):
             if not user_reviews.strip():
                 st.warning("Please enter a review before analyzing!")
@@ -479,7 +473,6 @@ def single_sentiment_analyzer():
                         POSITIVE ✅
                     </div>
                     """, unsafe_allow_html=True)
-                
                 else:
                     st.markdown("""
                     <div class="single-sentiment-red-success">
