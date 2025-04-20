@@ -7,98 +7,57 @@ from src.prediction import PredictPipeline
 from src.summariser import Summariser
 from src.utils import plot_pie_chart, plot_wordcloud
 import base64
+import os
 
 # Utility: Convert image to base64
 def img_to_base64(image_path):
     try:
         with open(image_path, "rb") as img_file:
             return base64.b64encode(img_file.read()).decode()
-    except Exception:
+    except Exception as e:
         return None
 
-# Page config
-st.set_page_config(
-    page_title="Hotelytics.ai",
-    page_icon="templates/img/hotelytics_favicon.png",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+# Load images in base64
+favicon_path = "templates/img/hotelytics_favicon.png"
+logo_path = "templates/img/hotelytics_logo.png"
 
-# Hide default Streamlit elements
+favicon_base64 = img_to_base64(favicon_path)
+logo_base64 = img_to_base64(logo_path)
+
+# Page config with embedded base64 favicon
+if favicon_base64:
+    st.set_page_config(
+        page_title="Hotelytics.ai",
+        page_icon=f"data:image/png;base64,{favicon_base64}",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+else:
+    st.set_page_config(
+        page_title="Hotelytics.ai",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+
+# Hide Streamlit default UI elements
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
-
     html, body, [class*="css"] {
         font-family: 'Poppins', 'Montserrat', sans-serif !important;
     }
-
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar styling
-st.markdown("""
-<style>       
-    .stVerticalBlock.st-emotion-cache-q2ax1o.eu6p4el3 > .stElementContainer.element-container.st-emotion-cache-kj6hex.eu6p4el1:nth-child(3){
-        margin-top: -35px;
-        margin-bottom: -20px;
-    }
-            
-    h1, h2, h3 {
-        color: #eba718 !important;
-        font-weight: 600;
-    }
-
-    .sidebar-img {
-        display: block;
-        margin-top: -10px;
-        margin-bottom: 25px;
-        width: 100%;
-    }
-
-    hr {
-        border: 1px solid #eba718;
-    }
-
-    .css-1y4grgt .css-18e3th9 {
-        color: #eba718 !important;
-        font-weight: normal !important;
-    }
-
-    .css-1y4grgt .css-18e3th9:hover {
-        color: #eba718 !important;
-    }
-
-    .css-1y4grgt .css-18e3th9.active {
-        color: white !important;
-        font-weight: 600 !important;
-    }
-
-    .css-1y4grgt .css-18e3th9 svg {
-        color: #eba718 !important;
-    }
-
-    .css-1y4grgt .css-18e3th9.active svg {
-        color: white !important;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-
-
-# Load logo
-img_path = "templates/img/hotelytics_logo.png"
-img_base64 = img_to_base64(img_path)
-if img_base64:
+# Show logo in sidebar if available
+if logo_base64:
     st.sidebar.markdown(
-        f'<img class="sidebar-img" src="data:image/png;base64,{img_base64}">', unsafe_allow_html=True,
+        f'<img class="sidebar-img" src="data:image/png;base64,{logo_base64}" style="margin-bottom: 20px; width: 100%;">',
+        unsafe_allow_html=True
     )
-
-query_params = st.query_params
-default_tab = query_params.get("tab", ["Home"])[0]
 
 
 
