@@ -40,7 +40,7 @@ else:
     )
 
 # Hide Streamlit default UI elements
-st.markdown("""
+st.markdown(""" 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
     html, body, [class*="css"] {
@@ -60,8 +60,9 @@ if logo_base64:
     )
 
 
-
 # Sidebar Navigation
+default_tab = "Home"  # Set default tab explicitly to avoid NameError
+
 with st.sidebar:
     selected = option_menu(
         menu_title="",
@@ -149,7 +150,6 @@ if selected == "Home":
                 margin-bottom: 2rem;
             }
 
-
             .cta-button {
                 display: flex;
                 justify-content: center;
@@ -161,7 +161,6 @@ if selected == "Home":
                 margin-bottom: 20px;
                 display: flex;
                 justify-content: center;
-                
             }
 
             .stButton > button {
@@ -196,7 +195,6 @@ if selected == "Home":
                 font-weight: 600;
                 color: #ffffff;
             }
-
 
             .section-title {
                 text-align: center;
@@ -267,7 +265,6 @@ if selected == "Home":
 
     st.markdown('<div class="hero-title">Insights Now - Action Tomorrow</div>', unsafe_allow_html=True)
     st.markdown('<div class="hero-sub">AI-Powered Sentiment Analysis for Smarter Hotel Decisions</div>', unsafe_allow_html=True)
-
 
     if 'page' not in st.session_state:
         st.session_state.page = 'Home'
